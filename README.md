@@ -4,7 +4,7 @@
 * Login Role based Authentication, Authorization with JWT Tokens and Fluent API Validation
 
 
-An API for House sale listings, CRUD operations for the houses, regions they reside and the the type of overall landscape of the area. 
+A Web API for House sale listings, CRUD operations for the houses, regions they reside and the the type of overall landscape of the area. 
 
 # Extensions Used
 * AutoMapper
