@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealEstateAPI.Models.DTO;
 using RealEstateAPI.Repositories;
+using System.Data;
 
 namespace RealEstateAPI.Controllers
 {
@@ -22,6 +24,7 @@ namespace RealEstateAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "reader")]
         public async Task<IActionResult> GetAllHousesAsync()
         {
 
@@ -35,6 +38,7 @@ namespace RealEstateAPI.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [ActionName("GetHouseAsync")]
+        [Authorize(Roles = "reader")]
         public async Task<IActionResult> GetHouseAsync(Guid id)
         {
             var house = await _housesRepository.GetAsync(id);
@@ -45,6 +49,7 @@ namespace RealEstateAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> AddHouseAsync([FromBody] Models.DTO.AddHouseRequest addHouseRequest)
         {
 
@@ -93,6 +98,7 @@ namespace RealEstateAPI.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> UpdateHouseAsync(
             [FromRoute] Guid id, [FromBody] Models.DTO.UpdateHouseRequest updateHouseRequest)
         {
@@ -142,6 +148,7 @@ namespace RealEstateAPI.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteHouseAsync(Guid id)
         {
             var houseDomain = await _housesRepository.GetAsync(id);

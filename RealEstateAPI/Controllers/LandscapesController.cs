@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealEstateAPI.Repositories;
+using System.Data;
 
 namespace RealEstateAPI.Controllers
 {
@@ -18,6 +20,7 @@ namespace RealEstateAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetAllLandscapesAsync()
         {
             var landscapes = await _landscapesRepository.GetAllAsync();
@@ -30,6 +33,7 @@ namespace RealEstateAPI.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [ActionName("GetLandscapeById")]
+        [Authorize(Roles = "Reader")]
         public async Task<IActionResult> GetLandscapeById(Guid id)
         {
             var landscape = await _landscapesRepository.GetAsync(id);
@@ -45,6 +49,7 @@ namespace RealEstateAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> AddLandscapeAsync(Models.DTO.AddLandscapeRequest landscapeRequest)
         {
 
@@ -67,6 +72,7 @@ namespace RealEstateAPI.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> UpdateLandscapeAsync(Guid id, Models.DTO.UpdateLandscapeRequest updateLandscapeRequest)
         {
 
@@ -94,6 +100,7 @@ namespace RealEstateAPI.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteLandscapeAsync(Guid id)
         {
             var landscapeDomain = await _landscapesRepository.DeleteAsync(id);

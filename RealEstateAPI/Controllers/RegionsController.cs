@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RealEstateAPI.Models.DTO;
 using RealEstateAPI.Repositories;
@@ -19,6 +20,7 @@ namespace RealEstateAPI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "reader")]
         public async Task<IActionResult> GetAllRegionsAsync()
         {
             var regions = await _regionsRepository.GetAllAsync();
@@ -31,6 +33,7 @@ namespace RealEstateAPI.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [ActionName("GetRegionAsync")]
+        [Authorize(Roles = "reader")]
         public async Task<IActionResult> GetRegionAsync(Guid id)
         {
             var region = await _regionsRepository.GetAsync(id);
@@ -46,6 +49,7 @@ namespace RealEstateAPI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> AddRegionAsync(Models.DTO.AddRegionRequest addRegionRequest)
         {
             if (!ValidateAddRegionAsync(addRegionRequest))
@@ -70,6 +74,7 @@ namespace RealEstateAPI.Controllers
 
         [HttpDelete]
         [Route("{id:guid}")]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> DeleteRegionAsync(Guid id)
         {
             var region = await _regionsRepository.DeleteAsync(id);
@@ -86,6 +91,7 @@ namespace RealEstateAPI.Controllers
 
         [HttpPut]
         [Route("{id:guid}")]
+        [Authorize(Roles = "writer")]
         public async Task<IActionResult> UpdateRegionAsync(
             [FromRoute] Guid id, [FromBody] Models.DTO.UpdateRegionRequest updateRegionRequest)
         {
