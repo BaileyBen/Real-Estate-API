@@ -1,4 +1,4 @@
-# RESTful API /  ASP.Net Core - WEB API / Entity Framework / SQL
+# RESTful / ASP.Net Core - WEB API / Entity Framework / SQL
 # RealEstate API  
 * Login Role based Authentication, Authorization with JWT Tokens and Fluent API Validation
 
