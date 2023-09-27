@@ -1,5 +1,6 @@
 # REST / ASP.Net Core - WEB API / Entity Framework / SQL
 # RealEstate API  
+
 * Login Role based Authentication, Authorization with JWT Tokens and Fluent API Validation
 
 A Web API for House sale listings, CRUD operations for the houses, regions they reside and the the type of overall landscape of the area. 
